@@ -17,32 +17,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+
     private String firstName;
 
-    @Column(nullable = false)
+   
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+  
     private String email;
 
-    @JsonIgnore
-    @Column(nullable = false)
+
     private String password;
 
-    @Column(nullable = false)
+
     private String company;
 
     private String industry;
 
-    @Column(nullable = false)
+
     private String userType; // "partner" or "supplier"
 
     private String phone;
 
     private String address;
 
-    @Column(updatable = false)
+  
     private java.util.Date createdAt;
 
     private java.util.Date updatedAt;
@@ -57,4 +56,5 @@ public class User {
     protected void onUpdate() {
         updatedAt = new java.util.Date();
     }
+
 }
