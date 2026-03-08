@@ -28,6 +28,9 @@ public class UserService {
         user.setIndustry(request.getIndustry());
         user.setUserType(request.getUserType());
 
+
+           user.setPhone("NA");
+          user.setAddress("NA");
         return userRepository.save(user);
     }
 
@@ -40,4 +43,6 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+ 
+
 }
