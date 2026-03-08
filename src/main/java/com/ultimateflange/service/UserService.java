@@ -11,38 +11,40 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+private final UserRepository userRepository;
+private final PasswordEncoder passwordEncoder;
 
-    public User registerUser(RegisterRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
+public User registerUser(RegisterRequest request) {
 
-        User user = new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setCompany(request.getCompany());
-        user.setIndustry(request.getIndustry());
-        user.setUserType(request.getUserType());
-
-
-           user.setPhone("NA");
-          user.setAddress("NA");
-        return userRepository.save(user);
+    if (userRepository.existsByEmail(request.getEmail())) {
+        throw new RuntimeException("Email already exists");
     }
 
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
+    User user = new User();
 
-    public User findById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
- 
+    user.setFirstName(request.getFirstName());
+    user.setLastName(request.getLastName());
+    user.setEmail(request.getEmail());
+    user.setPassword(passwordEncoder.encode(request.getPassword()));
+    user.setCompany(request.getCompany());
+    user.setIndustry(request.getIndustry());
+    user.setUserType(request.getUserType());
+
+    // default values
+    user.setPhone("NA");
+    user.setAddress("NA");
+
+    return userRepository.save(user);
+}
+
+public User findByEmail(String email) {
+    return userRepository.findByEmail(email)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+}
+
+public User findById(Long id) {
+    return userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+}
 
 }
